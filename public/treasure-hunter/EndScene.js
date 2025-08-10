@@ -6,11 +6,11 @@ class EndScene extends Phaser.Scene {
   }
 
   preload() {
-    this.load.spritesheet('playerWins', 'https://codecademy-content.s3.amazonaws.com/courses/learn-phaser/Treasure+Hunter/You+Won.png', {
+    this.load.spritesheet('playerWins', 'assets/won.png', {
       frameWidth: 480,
       frameHeight: 640
     });
-    this.load.spritesheet('playerLose', 'https://codecademy-content.s3.amazonaws.com/courses/learn-phaser/Treasure+Hunter/You+Lost.png', {
+    this.load.spritesheet('playerLose', 'assets/lost.png', {
       frameWidth: 480,
       frameHeight: 640
     });

@@ -7,39 +7,72 @@
     <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
-    <!-- Login/Sign-Up Form -->
-    <div id="auth-form">
-      <h2>Login</h2>
-      <form id="login-form">
-        <input type="text" id="username" placeholder="Username" required />
-        <input type="password" id="password" placeholder="Password" required />
-        <button type="submit">Login</button>
-      </form>
-      <p>Don't have an account? <a href="#" id="toggle-signup">Sign up</a></p>
-    </div>
-
     <!-- Game Section -->
-    <header id="game-header" style="display: none">
-      <h1>Phaser Game Hub</h1>
-      <nav>
-        <button onclick="loadGame('businessOutfittedBob')">
-          Business Outfitted Bob
-        </button>
-        <button onclick="loadGame('cubeMatcher')">Cube Matcher</button>
-        <button onclick="loadGame('electricMouse')">Electric Mouse</button>
-        <button onclick="loadGame('moleUnearther')">Mole Unearther</button>
-        <button onclick="loadGame('treasureHunter')">Treasure Hunter</button>
-        <button onclick="toggleFullscreen()">Fullscreen</button>
-        <button id="logout-btn">Logout</button>
-      </nav>
+    <header id="game-header">
+      <h1 style="float: left">Phaser Game Hub</h1>
+      <div id="auth-area" style="float: right">
+        <button id="login-btn">Login</button>
+        <span id="user-info" style="display: none">
+          Welcome, <span id="username-display"></span>!
+          <button id="logout-btn">Logout</button>
+        </span>
+      </div>
+      <div style="clear: both"></div>
     </header>
 
-    <main id="game-main" style="display: none">
+    <main id="game-main">
+      <div id="game-buttons">
+        <button id="button1" onclick="loadGame('businessOutfittedBob')">
+          Business Outfitted Bob
+        </button>
+        <button id="button2" onclick="loadGame('cubeMatcher')">
+          Cube Matcher
+        </button>
+        <button id="button3" onclick="loadGame('electricMouse')">
+          Electric Mouse
+        </button>
+        <button id="button4" onclick="loadGame('moleUnearther')">
+          Mole Unearther
+        </button>
+        <button id="button5" onclick="loadGame('treasureHunter')">
+          Treasure Hunter
+        </button>
+        <!-- <button id="button6" onclick="toggleFullscreen()">Fullscreen</button> -->
+      </div>
       <div id="gameContainer">
         <p>Select a game to start playing!</p>
       </div>
     </main>
 
+    <!-- Pop-Up Modal for Login/Register -->
+    <div id="auth-modal" class="modal" style="display: none">
+      <div class="modal-content">
+        <span id="close-modal" class="close">&times;</span>
+        <h2 id="auth-title">Login</h2>
+        <form id="auth-form">
+          <label>Username:</label>
+          <input
+            style="margin-bottom: 5px; margin-left: -3px"
+            type="text"
+            id="username"
+            placeholder="Username"
+            required
+          />
+          <br />
+          <label>Password:</label>
+          <input
+            type="password"
+            id="password"
+            placeholder="Password"
+            required
+          />
+          <br />
+          <button type="submit" id="auth-btn">Login</button>
+        </form>
+        <p id="auth-toggle">Don't have an account?</p>
+        <a href="#" id="toggle-signup">Sign up</a>
+      </div>
+    </div>
     <script src="./main.js"></script>
   </body>
 </html>

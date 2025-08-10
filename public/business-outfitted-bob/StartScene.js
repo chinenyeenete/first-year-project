@@ -4,17 +4,26 @@ class StartScene extends Phaser.Scene {
   }
 
   preload() {
-    this.load.image('start', 'https://codecademy-content.s3.amazonaws.com/courses/learn-phaser/BOB/Start+screen.png');
+    this.load.image('start', 'assets/start.png');
   }
 
   create() {
-    const screen = this.add.image(0, 0, 'start').setOrigin(0);
-    
-    // on keypress any, transition to GameScene
-    this.input.keyboard.on('keydown', () => {
-      this.scene.stop('StartScene');
-      this.scene.start('GameScene');
-    });
+    this.add.image(240, 320, 'start');  // Add the background image
+    // Add a button to start the game
+    const startButton = this.add.text(240, 560, 'Start Game', { fontSize: '24px', color: 'white' })
+      .setOrigin(0.5)
+      .setInteractive()
+      .on('pointerdown', () => {
+        this.scene.start('GameScene'); // Go to the Game Scene
+      });
+
+    // Add a button to view the rules
+    const rulesButton = this.add.text(240, 600, 'View Rules', { fontSize: '24px', color: 'white' })
+      .setOrigin(0.5)
+      .setInteractive()
+      .on('pointerdown', () => {
+        this.scene.start('RulesScene'); // Go to the Rules Scene
+      });
   }
 }
 

@@ -1,63 +1,172 @@
+/* Global Styles */
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Comic Sans MS', 'Arial', sans-serif; /* Fun font for a playful vibe */
   text-align: center;
-  background-color: #f4f4f4;
+  background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%); /* Colorful gradient background */
   margin: 0;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center;   
-  
+  align-items: center;
 }
 
+/* Header Section */
 header {
-  background-color: #333;
+  background: linear-gradient(to right, #ff6a00, #ffb200); /* Vibrant gradient */
   color: #fff;
   padding: 1em;
   width: 100%;
-  text-align: center;
+  display: flex;
+  align-items: center; /* Vertically align items */
+  justify-content: space-between; /* Space between title and auth area */
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3); /* Stronger shadow for pop */
 }
 
 header h1 {
-  margin: 0;
+  margin-left: 1em;
+  font-size: 28px;
+  font-weight: bold;
+  text-shadow: 2px 2px #ff6a00; /* Fun text shadow */
 }
 
-nav {
+/* Auth Area Styling */
+#auth-area {
   display: flex;
-  justify-content: center;
-  flex-wrap: wrap; 
-  gap: 10px;
-  margin-top: 1em;
+  align-items: center;
+  position: absolute;
+  right: 1.5em;
 }
 
-nav button {
-  margin: 0.5em;
-  padding: 0.5em 1em;
-  border: none;
-  background-color: #007bff;
+#auth-area button,
+#auth-area span {
+  font-size: 16px;
+  line-height: 1.5;
+  background: #ff6a00; /* Button background matches header */
   color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 15px;
+  margin-left: 10px;
   cursor: pointer;
-  border-radius: 5px;
+  transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
-nav button:hover {
-  background-color: #0056b3;
+#auth-area button:hover {
+  background: #ffa600;
+  transform: scale(1.1); /* Slight zoom effect */
 }
 
+/* Game Buttons Section */
+#game-buttons {
+  margin: 20px 0;
+}
+
+#game-buttons button {
+  margin: 10px;
+  padding: 12px 18px;
+  font-size: 18px;
+  background: linear-gradient(to right, #4facfe, #00f2fe); /* Bright, cheerful buttons */
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Subtle depth */
+}
+
+#game-buttons button:hover {
+  transform: scale(1.1); /* Interactive scaling effect */
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3); /* Enhanced shadow on hover */
+}
+
+/* Game Container */
 #gameContainer {
+  margin: auto;
   margin-top: 20px;
   width: 800px;
   height: 700px;
-  /* border: 2px solid #ccc; */
-  /* background-color: white; */
   display: flex;
   align-items: center;
   justify-content: center;
-  box-sizing: border-box;
+  background: #fff;
+  border: 4px solid #ff6a00; /* Vibrant border */
+  border-radius: 15px;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.3); /* Strong shadow for emphasis */
+  /* display: none; */
 }
 
 iframe {
   width: 100%;
   height: 100%;
   border: none;
-} 
+}
+
+/* Modal Styling */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7); /* Darker overlay */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content {
+  background: linear-gradient(to bottom, #ff9a9e, #fad0c4); /* Fun gradient for modal */
+  padding: 30px;
+  width: 40%;
+  max-width: 500px;
+  border-radius: 15px;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.3); /* Elevated shadow */
+  text-align: center;
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+.modal-content h2 {
+  margin-bottom: 15px;
+  color: #333;
+  font-size: 22px;
+}
+
+.modal button {
+  margin: 10px;
+  padding: 10px 20px;
+  background: #00d2ff; /* Bright blue button */
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.modal button:hover {
+  background: #008cff; /* Darker blue on hover */
+  transform: scale(1.1); /* Zoom effect */
+}
+
+/* Close Button */
+.close {
+  color: #ff6a00;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  transition: color 0.3s ease;
+}
+
+.close:hover,
+.close:focus {
+  color: #ffa600;
+}
+
+/* Misc */
+#auth-toggle {
+  display: inline;
+}

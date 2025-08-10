@@ -21,7 +21,7 @@ class GameScene extends Phaser.Scene {
     // We have preloaded our images such as the background, the coins, the digging image etc.
     this.load.image(
       "board",
-      "https://codecademy-content.s3.amazonaws.com/courses/learn-phaser/Treasure+Hunter/Gameboard+Default.png",
+      "assets/gameboard-default.png",
       {
         frameWidth: 240,
         frameHeight: 320,
@@ -29,20 +29,20 @@ class GameScene extends Phaser.Scene {
     );
     this.load.image(
       "gold",
-      "https://codecademy-content.s3.amazonaws.com/courses/learn-phaser/Treasure+Hunter/gold+coin.png"
+      'assets/gold-coin.png',
     );
     this.load.image(
       "playerGold",
-      "https://codecademy-content.s3.amazonaws.com/courses/learn-phaser/Treasure+Hunter/gold+coin+shine.png"
+      'assets/gold-coin-shine.png'
     );
     this.load.image(
       "dig",
-      "https://codecademy-content.s3.amazonaws.com/courses/learn-phaser/Treasure+Hunter/dug+hole.png"
+      "assets/dug-hole.png"
     );
     this.load.image(
       "blank",
-      "https://codecademy-content.s3.amazonaws.com/courses/learn-phaser/Treasure+Hunter/blank.png"
-    ); // These are the actual images / tiles that load on top of 'board'
+      "assets/blank.png"
+    ); 
   }
 
   create() {

@@ -1,30 +1,61 @@
 const API_URL = "http://localhost:3000/api/users"; // Adjust for your backend URL
 
-// Elements
-const authForm = document.getElementById("auth-form");
-const loginForm = document.getElementById("login-form");
-const toggleSignup = document.getElementById("toggle-signup");
-const gameHeader = document.getElementById("game-header");
-const gameMain = document.getElementById("game-main");
+// Modal Elements
+const loginBtn = document.getElementById("login-btn");
 const logoutBtn = document.getElementById("logout-btn");
+const authModal = document.getElementById("auth-modal");
+const closeModal = document.getElementById("close-modal");
+const authForm = document.getElementById("auth-form");
+const authTitle = document.getElementById("auth-title");
+const authToggle = document.getElementById("auth-toggle");
+const toggleSignup = document.getElementById("toggle-signup");
+const authBtn = document.getElementById("auth-btn");
+const authArea = document.getElementById("auth-area");
+const userInfo = document.getElementById("user-info");
+const usernameDisplay = document.getElementById("username-display");
 
-// State
-let isSignup = false;
+let isSignup = false; // Tracks whether the user is signing up
 
-// Toggle between login and sign-up
+// Check if user is logged in
+document.addEventListener("DOMContentLoaded", () => {
+  const token = localStorage.getItem("token");
+  const username = localStorage.getItem("username");
+  if (token && username) {
+    showUserInfo(username);
+  }
+});
+
+// Open the modal
+loginBtn.addEventListener("click", () => {
+  authModal.style.display = "flex";
+});
+
+// Close the modal
+closeModal.addEventListener("click", () => {
+  authModal.style.display = "none";
+});
+
+// Toggle between login and signup
 toggleSignup.addEventListener("click", (e) => {
   e.preventDefault();
   isSignup = !isSignup;
-  document.querySelector("#auth-form h2").textContent = isSignup
-    ? "Sign Up"
-    : "Login";
-  toggleSignup.textContent = isSignup
-    ? "Already have an account? Login"
-    : "Don't have an account? Sign up";
+  authTitle.textContent = isSignup ? "Sign Up" : "Login";
+  authBtn.textContent = isSignup ? "Sign Up" : "Login";
+  authToggle.textContent = isSignup
+    ? "Already have an account?"
+    : "Don't have an account?";
+  toggleSignup.textContent = isSignup ? "Sign Up" : "Login";
+});
+
+// Close the modal if the user clicks outside of it
+window.addEventListener("click", (e) => {
+  if (e.target === authModal) {
+    authModal.style.display = "none";
+  }
 });
 
 // Handle form submission
-loginForm.addEventListener("submit", async (e) => {
+authForm.addEventListener("submit", async (e) => {
   e.preventDefault();
 
   const username = document.getElementById("username").value;
@@ -46,12 +77,15 @@ loginForm.addEventListener("submit", async (e) => {
       if (!isSignup) {
         // Login successful
         localStorage.setItem("token", data.token); // Save the JWT token
-        showGameSection();
+        localStorage.setItem("username", username);
+        alert(`Welcome back, ${username}!`);
+        showUserInfo(username);
       } else {
         // Registration successful
         alert("Account created successfully! Please log in.");
-        toggleSignup.click(); // Switch to login
+        toggleSignup.click(); // Switch back to login view
       }
+      authModal.style.display = "none"; // Close the modal
     } else {
       throw new Error(data.error || "Something went wrong");
     }
@@ -60,19 +94,20 @@ loginForm.addEventListener("submit", async (e) => {
   }
 });
 
-// Show the game section after login
-function showGameSection() {
-  authForm.style.display = "none";
-  gameHeader.style.display = "block";
-  gameMain.style.display = "block";
+// Show user info and logout button
+function showUserInfo(username) {
+  loginBtn.style.display = "none";
+  userInfo.style.display = "inline";
+  usernameDisplay.textContent = username;
 }
 
 // Handle logout
 logoutBtn.addEventListener("click", () => {
-  localStorage.removeItem("token"); // Clear the token
-  authForm.style.display = "block";
-  gameHeader.style.display = "none";
-  gameMain.style.display = "none";
+  localStorage.removeItem("token");
+  localStorage.removeItem("username");
+  loginBtn.style.display = "inline";
+  userInfo.style.display = "none";
+  alert(`Logged Out Successfully!`);
 });
 
 function loadGame(game) {
@@ -116,3 +151,4 @@ function toggleFullscreen() {
     document.exitFullscreen();
   }
 }
+
