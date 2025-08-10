@@ -1,8 +1,7 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const User = require("../models/User");
-
+const db = require("../db");
 const router = express.Router();
 
 // Register a new user
@@ -52,22 +51,48 @@ router.post("/login", (req, res) => {
   });
 });
 
-// Update highscore
-router.post("/highscore", (req, res) => {
-  const { token, highscore } = req.body;
+// Get a user's high score for a specific game
+router.get('/highscore/:game_name', (req, res) => {
+  const { game_name } = req.params;
+  const token = req.headers.authorization?.split(' ')[1];
+
+  if (!token) return res.status(401).json({ error: 'Unauthorized' });
 
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    const query =
-      "UPDATE users SET highscore = ? WHERE id = ? AND highscore < ?";
-
-    db.run(query, [highscore, decoded.id, highscore], (err) => {
-      if (err)
-        return res.status(500).json({ error: "Error updating highscore." });
-      res.json({ message: "Highscore updated!" });
-    });
+      const decoded = jwt.verify(token, process.env.JWT_SECRET);
+      const query = 'SELECT highscore FROM highscores WHERE user_id = ? AND game_name = ?';
+      db.get(query, [decoded.id, game_name], (err, row) => {
+          if (err) return res.status(500).json({ error: 'Database error' });
+          res.json({ highscore: row?.highscore || 0 });
+      });
   } catch (err) {
-    res.status(401).json({ error: "Invalid token." });
+      res.status(401).json({ error: 'Invalid token' });
+  }
+});
+
+// Update a user's high score for a specific game
+router.post('/highscore/:game_name', (req, res) => {
+  const { game_name } = req.params;
+  const { score } = req.body;
+  const token = req.headers.authorization?.split(' ')[1];
+
+  if (!token) return res.status(401).json({ error: 'Unauthorized' });
+
+  try {
+      const decoded = jwt.verify(token, process.env.JWT_SECRET);
+      const query = `
+          INSERT INTO highscores (user_id, game_name, highscore)
+          VALUES (?, ?, ?)
+          ON CONFLICT(user_id, game_name)
+          DO UPDATE SET highscore = MAX(highscore, excluded.highscore);
+      `;
+
+      db.run(query, [decoded.id, game_name, score], (err) => {
+          if (err) return res.status(500).json({ error: 'Database error' });
+          res.json({ message: 'Highscore updated!' });
+      });
+  } catch (err) {
+      res.status(401).json({ error: 'Invalid token' });
   }
 });
 

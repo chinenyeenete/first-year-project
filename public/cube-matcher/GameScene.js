@@ -5,8 +5,6 @@ let score = 0;
 
 // Add Highscore + Combo
 
-
-
 class GameScene extends Phaser.Scene {
   constructor() {
     super({ key: 'GameScene' });
@@ -14,14 +12,23 @@ class GameScene extends Phaser.Scene {
 
   preload() {
     // Load images for board and cubes
-    this.load.spritesheet('blocks', 'https://codecademy-content.s3.amazonaws.com/courses/learn-phaser/cube-matcher/blocks.png', {
+    this.load.spritesheet('blocks', 'assets/blocks.png', {
       frameWidth: cubeSize,
       frameHeight: cubeSize
     });
-    this.load.image('grid', 'https://codecademy-content.s3.amazonaws.com/courses/learn-phaser/cube-matcher/grid.png');
+    this.load.image('grid', 'assets/grid.png');
   }
 
   create() {
+    // Add HighScore Counter
+    fetchHighScore("Cube Matcher").then((highscore) => {
+      this.add
+        .text(90, 600, `Highscore: ${highscore}`, {
+          fontSize: "18px",
+          color: "white",
+        })
+        .setOrigin(0.5);
+    });
     // Add background
     this.add.image(0, 0, 'grid').setOrigin(0).setScale(0.50);
     // Set boundaries of the game

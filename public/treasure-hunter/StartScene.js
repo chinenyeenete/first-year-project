@@ -6,31 +6,30 @@ class StartScene extends Phaser.Scene {
   }
 
   preload() {
-    this.load.spritesheet('background', 'https://codecademy-content.s3.amazonaws.com/courses/learn-phaser/Treasure+Hunter/Start+Screen.png', {
+    this.load.spritesheet('background', 'assets/start.png', {
       frameWidth: 480,
       frameHeight: 640
     });
   }
 
   create() {
-    // Creates the text on the start screen:
-    this.add.text(10, 50, 'Treasure Hunter', {
-      fill: '#4D39E0',
-      fontSize: '45px'
-    });
-    this.add.text(130, 520, ' Ready to find some gold?\nClick to start!', {
-      fill: '#4D39E0',
-      fontSize: '20px'
-    });
-
     // Create the sprite object, animation, and play the animation: 
     this.add.sprite(240, 320, 'background');
-    
-    this.input.on('pointerup', () => {
-      // Add logic to transition from StartScene to GameScene:
-      this.scene.stop('StartScene');
-      this.scene.start('GameScene');
-    });
+
+    const startButton = this.add.text(240, 275, 'Start Game', { fontSize: '24px', color: 'white' })
+      .setOrigin(0.5)
+      .setInteractive()
+      .on('pointerdown', () => {
+        this.scene.start('GameScene'); // Go to the Game Scene
+      });
+
+    // Add a button to view the rules
+    const rulesButton = this.add.text(240, 325, 'View Rules', { fontSize: '24px', color: 'white' })
+      .setOrigin(0.5)
+      .setInteractive()
+      .on('pointerdown', () => {
+        this.scene.start('RulesScene'); // Go to the Rules Scene
+      });
 
   }
 }

@@ -4,7 +4,7 @@ class EndScene extends Phaser.Scene {
   }
 
   preload() {
-    this.load.image('endScreen', 'https://codecademy-content.s3.amazonaws.com/courses/learn-phaser/cube-matcher/end.png');
+    this.load.image('endScreen', 'assets/end.png');
   }
 
   create() {
@@ -13,9 +13,18 @@ class EndScene extends Phaser.Scene {
     // Set end screen image
     this.add.image(0, 0, 'endScreen').setOrigin(0);
     // Display score of completed game
-    const scoreText = this.add.text(150, 520, `Score: ${score}`, {
+    const scoreText = this.add.text(240, 520, `Score: ${score}`, {
       fontSize: '25px',
       fill: '#ff0000'
+    }).setOrigin(0.5);
+    submitHighScore('Cube Matcher', score);
+    fetchHighScore("Cube Matcher").then((highscore) => {
+      this.add
+        .text(240, 560, `Highscore: ${highscore}`, {
+          fontSize: "25px",
+          color: "white",
+        })
+        .setOrigin(0.5);
     });
     // Sets the z-index: Put the text on top of the background and any other images
     scoreText.setDepth(1);

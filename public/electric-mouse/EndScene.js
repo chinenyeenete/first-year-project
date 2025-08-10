@@ -6,8 +6,8 @@ class EndScene extends Phaser.Scene {
   }
 
   preload() {
-    this.load.image('playerWins', 'https://codecademy-content.s3.amazonaws.com/courses/learn-phaser/electric-mouse/won.png');
-    this.load.image('playerLose', 'https://codecademy-content.s3.amazonaws.com/courses/learn-phaser/electric-mouse/lost.png');
+    this.load.image('playerWins', 'assets/won.png');
+    this.load.image('playerLose', 'assets/lost.png');
   }
 
   create() {

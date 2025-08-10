@@ -45,19 +45,27 @@ class GameScene extends Phaser.Scene {
     // the background is loaded from the given url
     this.load.image(
       "background",
-      "https://codecademy-content.s3.amazonaws.com/courses/learn-phaser/mole-unearther/background.png"
+      "assets/background.png"
     );
     // calls the spritesheet function to load in the mole as a spritesheet to make animations, and assigns it to the mole key
     // the mole is loaded from the given url with the given width and height
     this.load.spritesheet(
       "mole",
-      "https://codecademy-content.s3.amazonaws.com/courses/learn-phaser/mole-unearther/mole-sprite.png",
+      "assets/mole-sprite.png",
       { frameWidth: 198, frameHeight: 250 }
     );
   }
 
   // set up scene visuals, animations, and game logic when events occur
   create() {
+    fetchHighScore("Mole Unearther").then((highscore) => {
+      this.add
+        .text(400, 10, `Highscore: ${highscore}`, {
+          fontSize: "18px",
+          color: "black",
+        })
+        .setOrigin(0.5);
+    });
     const updateTimer = (timeElapsed) => {
       timeLeft -= timeElapsed;
     };

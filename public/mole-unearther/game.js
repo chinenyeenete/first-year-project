@@ -5,8 +5,8 @@ const config = {
 	physics: {
 		default: 'arcade',
 	},
-	backgroundColor: 'F8B392',
-	scene: [StartScene, GameScene, EndScene],
+	backgroundColor: '808080',
+	scene: [StartScene, GameScene, EndScene, RulesScene ],
 };
 
 const game = new Phaser.Game(config);

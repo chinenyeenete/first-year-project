@@ -23,32 +23,32 @@ class GameScene extends Phaser.Scene {
 
   preload() {
     const baseURL = 'https://codecademy-content.s3.amazonaws.com/courses/learn-phaser/electric-mouse/'
-    this.load.image('Background', `${baseURL}background.png`);
+    this.load.image('Background', 'assets/background.png');
     this.load.image('Attack', `${baseURL}button-attack.png`);
     this.load.image('Defend', `${baseURL}button-defend.png`);
     this.load.image('Special',`${baseURL}button-special.png`);
     const framePxWidth = 1500 / 9;
-    this.load.spritesheet('Electric Mouse',`${baseURL}electric-mouse.png`, {
+    this.load.spritesheet('Electric Mouse','assets/electric-mouse.png', {
       frameWidth: framePxWidth,
       frameHeight: 128,
       endFrame: 8
     });
-    this.load.spritesheet('Owl', `${baseURL}owl.png`, {
+    this.load.spritesheet('Owl', 'assets/owl.png', {
       frameWidth: framePxWidth,
       frameHeight: 132,
       endFrame: 8
     });
-    this.load.spritesheet('Red Owl', `${baseURL}owl-red.png`, {
+    this.load.spritesheet('Red Owl', 'assets/owl-red.png', {
       frameWidth: framePxWidth,
       frameHeight: 132,
       endFrame: 8
     });
-    this.load.spritesheet('Blue Owl', `${baseURL}owl-blue.png`, {
+    this.load.spritesheet('Blue Owl', 'assets/owl-blue.png', {
       frameWidth: framePxWidth,
       frameHeight: 132,
       endFrame: 8
     });
-    this.load.spritesheet('Psychic Hairless Cat', `${baseURL}psychic-cat.png`, {
+    this.load.spritesheet('Psychic Hairless Cat', 'assets/psychic-cat.png', {
       frameWidth: framePxWidth,
       frameHeight: 148,
       endFrame: 11
@@ -246,7 +246,7 @@ class GameScene extends Phaser.Scene {
 
     gameState.playerMove = this.add.text(65, 140, '', style);
     gameState.computerMove = this.add.text(320, 140, '', style);
-    gameState.information = this.add.text(140, 80, '', style);
+    gameState.information = this.add.text(240, 80, '', style).setOrigin(0.5);
     gameState.playerHealthBar = this.add.text(45, 45, `HP: ${gameState.player.health}`, style);
     gameState.computerHealthBar = this.add.text(375, 45, `HP: ${gameState.computer.health}`, style);
 
