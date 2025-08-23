@@ -5,7 +5,7 @@ dist-ssr
 *.local
 
 # Sensitive Data
-.env
+*.env
 config.local.js
 
 # Logs and Runtime
